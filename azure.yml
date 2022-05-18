@@ -7,6 +7,7 @@ steps :
          SourceFolder: '/home/vsts/work/1/s'
          Contents: '**'
          TargetFolder: '/home/vsts/work/1/s/firmb'
+   - script : ls firmb
    - script : |
       sudo dpkg --add-architecture i386
       sudo apt-get update -yq && sudo apt-get upgrade -yq
@@ -25,7 +26,7 @@ steps :
      displayName: tool chain
    - script : |
       /opt/microchip/mplabx/v6.00/mplab_platform/bin/prjMakefilesGenerator.sh /home/vsts/work/1/s/firmb/rhino1/GHG_App_V1.0.X/
-      ls firmb/rhino1/GHG_App_V1.0.X/
+      ls firmb/rhino1/GHG_App_V1.0.X/nbproject
       cd firmb/rhino1/GHG_App_V1.0.X/
       make
      displayName: build step
