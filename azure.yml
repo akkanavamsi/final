@@ -6,7 +6,7 @@ steps :
      inputs:
          SourceFolder: '/home/vsts/work/1/s'
          Contents: '**'
-         TargetFolder: '/home/vsts/work/1/s/firmbnews'
+         TargetFolder: '/home/vsts/work/1/s/firmb'
    - script : |
       sudo dpkg --add-architecture i386
       sudo apt-get update -yq && sudo apt-get upgrade -yq
@@ -24,14 +24,14 @@ steps :
       pwd
      displayName: tool chain
    - script : |
-      /opt/microchip/mplabx/v6.00/mplab_platform/bin/prjMakefilesGenerator.sh /rhino1/GHG_App_V1.0.X/
-      cd /rhino1/GHG_App_V1.0.X/
+      /opt/microchip/mplabx/v6.00/mplab_platform/bin/prjMakefilesGenerator.sh /home/vsts/work/1/s/firmb/rhino1/GHG_App_V1.0.X/
+      cd /home/vsts/work/1/s/firmb/rhino1/GHG_App_V1.0.X/
       make
      displayName: build step
    
    - task: CopyFiles@2
      inputs:
-          SourceFolder: 'rhino1/GHG_App_EFG.X/dist/pic32mz/production'
+          SourceFolder: 'firmb/rhino1/GHG_App_EFG.X/dist/pic32mz/production'
           Contents: '**'
           TargetFolder: '$(build.artifactstagingdirectory)'
      
@@ -42,18 +42,18 @@ steps :
          publishLocation: 'Container'
 
    - script : |
-      cd rhino1
+      cd /home/vsts/work/1/s/firmb
       ceedling test:all
      displayName: run unit tests
    
    - task: PublishTestResults@2
      inputs:
       testResultsFormat: 'JUnit'
-      testResultsFiles: rhino1/build/artifacts/test/report.xml
+      testResultsFiles: firmb/rhino1/build/artifacts/test/report.xml
      
    - task: CopyFiles@2
      inputs:
-         SourceFolder: 'rhino1/build/artifacts/test'
+         SourceFolder: 'firmb/rhino1/build/artifacts/test'
          Contents: '*.xml'
          TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
