@@ -33,7 +33,7 @@ steps :
    
    - task: CopyFiles@2
      inputs:
-          SourceFolder: '/home/vsts/work/1/s/firmb/rhino1/GHG_App_EFG.X/dist/pic32mz/production'
+          SourceFolder: 'firmb/rhino1/GHG_App_V1.0.X/dist/pic32mz/production'
           Contents: '**'
           TargetFolder: '$(build.artifactstagingdirectory)'
      
