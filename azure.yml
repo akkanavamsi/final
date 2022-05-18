@@ -23,18 +23,10 @@ steps :
       cd /rhino1/GHG_App_V1.0.X/
       make
      displayName: build step
-
-   - script : |
-      cd rhino1
-      ceedling test:all
-     displayName: run unit tests
-
-     
-
-    
+   
    - task: CopyFiles@2
      inputs:
-          SourceFolder: 'firmbnews/GHG_App_EFG.X/dist/pic32mz/production'
+          SourceFolder: 'rhino1/GHG_App_EFG.X/dist/pic32mz/production'
           Contents: '**'
           TargetFolder: '$(build.artifactstagingdirectory)'
      
@@ -43,3 +35,20 @@ steps :
          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
          ArtifactName: 'drop'
          publishLocation: 'Container'
+
+   - script : |
+      cd rhino1
+      ceedling test:all
+     displayName: run unit tests
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: rhino1/build/artifacts/test/report.xml
+     
+  - task: CopyFiles@2
+    inputs:
+         SourceFolder: 'rhino1/build/artifacts/test'
+         Contents: '*.xml'
+         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
