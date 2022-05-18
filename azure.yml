@@ -33,7 +33,7 @@ steps :
    
    - task: CopyFiles@2
      inputs:
-          SourceFolder: 'firmb/rhino1/GHG_App_EFG.X/dist/pic32mz/production'
+          SourceFolder: '/home/vsts/work/1/s/firmb/rhino1/GHG_App_EFG.X/dist/pic32mz/production'
           Contents: '**'
           TargetFolder: '$(build.artifactstagingdirectory)'
      
@@ -44,7 +44,7 @@ steps :
          publishLocation: 'Container'
 
    - script : |
-      cd /home/vsts/work/1/s/firmb
+      cd firmb
       ceedling test:all
      displayName: run unit tests
    
