@@ -40,14 +40,14 @@ steps :
       cd rhino1
       ceedling test:all
      displayName: run unit tests
-
-  - task: PublishTestResults@2
-    inputs:
+   
+   - task: PublishTestResults@2
+     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: rhino1/build/artifacts/test/report.xml
      
-  - task: CopyFiles@2
-    inputs:
+   - task: CopyFiles@2
+     inputs:
          SourceFolder: 'rhino1/build/artifacts/test'
          Contents: '*.xml'
          TargetFolder: '$(Build.ArtifactStagingDirectory)'
